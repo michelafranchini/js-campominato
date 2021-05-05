@@ -57,7 +57,8 @@ while (tentativi.length < maxTentativi && gameOver == false) {
 
     if (isInArray(numeroUtente, arrayBombe)) {
         gameOver == true; 
-        alert("Hai Perso! \nHai totatizzato " + tentativi.length + " punti"); 
+        alert("Hai Perso! \nHai totalizzato " + tentativi.length + " punti");
+        console.log(("Hai Perso! \nHai totalizzato " + tentativi.length + " punti")); 
     } else if (!isInArray(numeroUtente, tentativi)) {
         tentativi.push(numeroUtente); 
     }
@@ -65,11 +66,14 @@ while (tentativi.length < maxTentativi && gameOver == false) {
 
 }
 
-if (tentativi.length == maxTentativi) {
-    alert("Hai Vinto! \nHai totatizzato " + tentativi.length + " punti"); 
-}
 
-console.log(tentativi);
+// NB Non capisco il perchè se metto queste righe di codice smette di farmi la stampa in console
+
+// if (tentativi.length == maxTentativi) {
+//     console.log("Hai Vinto! \nHai totalizzato " + tentativi.length + " punti"); 
+// }
+
+// console.log(tentativi);
 
 
 
