@@ -9,17 +9,13 @@
 // -------------------------FUNZIONI-------------------------------
 
 // Generare numeri random 
-function numeriCasuali (min, max) {
+function numeriCasuali(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min; 
 }
 
-// for (i = 0  ; i < 50 ; i++) {
-//     console.log(numeriCasuali(1, 100));
-// }
-
 // verifica numeri nell'array
 function isInArray (element, array) {
-    for (var i = 0; i < array.lenght; i++) {
+    for (var i = 0; i < array.length; i++) {
         if (element == array[i]) {
             return true; 
         }
@@ -28,23 +24,56 @@ function isInArray (element, array) {
     return false; 
 }
 
-// ---------------------------VARIABILI-------------------------------
-var bombe = []; 
+// variabili
+var arrayBombe = []; 
 var tentativi = []; 
-var maxTentativi = 10; 
+var maxTentativi = 84;
 
 // /variabili
 
-while (bombe.lenght < 16) {
-    var numeriRandom = numeriCasuali(1, 100); 
-    console.log(numeriRandom);
+// devo fare in modo che non ci siano doppioni all'interno della arrayBombe
+var i = 0; 
+// arrayBombe deve avere 16 elementi
+while (arrayBombe.length < 16) {  
 
-    if (!isInArray(numeriRandom, bombe) ) {
-        bombe.push(numeriRandom); 
+    var bombe = numeriCasuali(1, 100); 
+    
+    // se il numero non si ripete allora può pusharlo nell'array
+    if (!isInArray(bombe, arrayBombe)) {   
+        arrayBombe.push(bombe); 
     }
-    console.log(bombe.lenght);
 }
-console.log("bombe " ,  bombe);
+console.log(arrayBombe);
+
+
+
+var gameOver = false; 
+
+while (tentativi.length < maxTentativi && gameOver == false) {
+
+    do {
+        var numeroUtente = parseInt(prompt("Inserisci un numero da 1 a 100.")); 
+    } while (isNaN(numeroUtente) || numeroUtente < 1 || numeroUtente > 100); 
+
+    if (isInArray(numeroUtente, arrayBombe)) {
+        gameOver == true; 
+        alert("Hai Perso! \nHai totatizzato " + tentativi.length + " punti"); 
+    } else if (!isInArray(numeroUtente, tentativi)) {
+        tentativi.push(numeroUtente); 
+    }
+    console.log(numeroUtente, tentativi.length );
+
+}
+
+if (tentativi.length == maxTentativi) {
+    alert("Hai Vinto! \nHai totatizzato " + tentativi.length + " punti"); 
+}
+
+console.log(tentativi);
+
+
+
+
 
 
 
