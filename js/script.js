@@ -6,6 +6,12 @@
 // La partita termina quando il giocatore inserisce un numero "vietato" o raggiunge il numero massimo possibile di numeri consentiti.
 // Al termine della partita il software deve comunicare il punteggio, cioè il numero di volte che l'utente ha inserito un numero consentito.
 
+
+// BONUS: (da fare solo se funziona tutto il resto)
+// all'inizio il software richiede anche una difficoltà all'utente che cambia il range di numeri casuali:
+// con difficoltà 0 => tra 1 e 100
+// con difficoltà 1 => tra 1 e 80
+// con difficoltà 2 => tra 1 e 50
 // -------------------------FUNZIONI-------------------------------
 
 // Generare numeri random 
@@ -27,16 +33,36 @@ function isInArray (element, array) {
 // variabili
 var arrayBombe = []; 
 var tentativi = []; 
-var maxTentativi = 84;
+
+var maxRange; 
+var difficolta = parseInt(prompt("inserisci la difficoltà: \n 0 facile \n 1 medio \n 2 difficile")); 
 
 // /variabili
+
+
+switch (difficolta) {
+    case 0 :
+        maxRange = 100; 
+        break; 
+    case 1 : 
+        maxRange = 80;
+        break; 
+    case 2 :
+        maxRange = 50; 
+        break; 
+    default: 
+        alert("Errore! Inserisci un livello di difficoltà valido"); 
+        console.log("Errore! Inserisci un livello di difficoltà");
+}
+
+var maxTentativi = maxRange - 16;
 
 // devo fare in modo che non ci siano doppioni all'interno della arrayBombe
 var i = 0; 
 // arrayBombe deve avere 16 elementi
 while (arrayBombe.length < 16) {  
 
-    var bombe = numeriCasuali(1, 100); 
+    var bombe = numeriCasuali(1, maxRange); 
     
     // se il numero non si ripete allora può pusharlo nell'array
     if (!isInArray(bombe, arrayBombe)) {   
@@ -67,7 +93,7 @@ while (tentativi.length < maxTentativi && gameOver == false) {
 }
 
 
-// NB Non capisco il perchè se metto queste righe di codice smette di farmi la stampa in console
+// NB Non capisco il perchè se metto queste righe di codice smette di farmi la stampa in console su Chrome
 
 // if (tentativi.length == maxTentativi) {
 //     console.log("Hai Vinto! \nHai totalizzato " + tentativi.length + " punti"); 
